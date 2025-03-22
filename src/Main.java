@@ -1,3 +1,5 @@
+import com.sun.nio.sctp.AbstractNotificationHandler;
+
 import java.util.*;
 
 public class Main {
@@ -11,16 +13,17 @@ public class Main {
         rules.put(5, "Buzz");
 
         for (int i = MIN_VALUE; i <= MAX_VALUE; ++ i){
-          if(i % 3 == 0 && i % 5 == 0)
-              System.out.println(rules.get(3) + rules.get(5));
+            StringBuilder output = new StringBuilder();
+            
+            for(Map.Entry<Integer, String> entry : rules.entrySet()){
+                if(i % entry.getKey() == 0)
+                    output.append(entry.getValue());
+            }
+            if (output.length() == 0)
+                System.out.println(i);
 
-          else if(i % 3 == 0)
-              System.out.println(rules.get(3));
-
-          else if(i % 5 == 0)
-              System.out.println(rules.get(5));
-
-          else System.out.println(i);
+            else
+                System.out.println(output.toString());
         }
     }
 }
